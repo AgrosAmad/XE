@@ -16,7 +16,8 @@
 #include "managers/shaderManager.h"
 #include "managers/shaderProgramManager.h"
 
-namespace static_meshes_3D {
+using namespace XE;
+using namespace static_meshes_3D;
 
 const std::string Heightmap::MULTILAYER_SHADER_PROGRAM_KEY = "multilayer_heightmap";
 
@@ -401,5 +402,3 @@ void Heightmap::setUpIndexBuffer()
     // Calculate total count of indices
     _numIndices = (_rows - 1)*_columns * 2 + _rows - 1;
 }
-
-} // namespace static_meshes_3D

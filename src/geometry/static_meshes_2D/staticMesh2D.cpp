@@ -4,7 +4,7 @@
 // Project
 #include "staticMesh2D.h"
 
-namespace static_meshes_2D {
+using namespace XE::static_meshes_2D;
 
 const int StaticMesh2D::POSITION_ATTRIBUTE_INDEX           = 0;
 const int StaticMesh2D::TEXTURE_COORDINATE_ATTRIBUTE_INDEX = 1;
@@ -72,5 +72,3 @@ void StaticMesh2D::setVertexAttributesPointers(int numVertices)
         offset += sizeof(glm::vec2)*numVertices;
     }
 }
-
-} // namespace static_meshes_2D

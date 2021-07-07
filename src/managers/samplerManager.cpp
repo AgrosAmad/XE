@@ -4,6 +4,8 @@
 // Project
 #include "samplerManager.h"
 
+using namespace XE;
+
 SamplerManager& SamplerManager::getInstance()
 {
     static SamplerManager sm;

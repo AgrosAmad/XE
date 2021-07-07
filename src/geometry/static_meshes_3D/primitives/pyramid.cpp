@@ -4,7 +4,7 @@
 // Project
 #include "pyramid.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 glm::vec3 Pyramid::vertices[12] =
 {
@@ -95,5 +95,3 @@ void Pyramid::initializeData()
 
 	_isInitialized = true;
 }
-
-} // namespace static_meshes_3D

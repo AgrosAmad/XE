@@ -4,6 +4,8 @@
 // Project
 #include "shaderProgram.h"
 
+using namespace XE;
+
 ShaderProgram::~ShaderProgram()
 {
     deleteProgram();

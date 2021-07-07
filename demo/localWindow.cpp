@@ -1,5 +1,7 @@
 #include "localWindow.h"
 
+using namespace XE;
+
 void LocalWindow::initializeScene()
 {
 	glClearColor(0.0f, 0.28f, 0.57f, 1.0f);

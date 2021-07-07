@@ -9,22 +9,25 @@
 // Project
 #include "../staticMesh2D.h"
 
-namespace static_meshes_2D {
-
-/**
- * Quad static mesh of unit size.
- */
-class Quad : public StaticMesh2D
+namespace XE
 {
-public:
-    Quad(bool withPositions = true, bool withTextureCoordinates = true);
+    namespace static_meshes_2D {
 
-    void render() const override;
+        /**
+         * Quad static mesh of unit size.
+         */
+        class Quad : public StaticMesh2D
+        {
+        public:
+            Quad(bool withPositions = true, bool withTextureCoordinates = true);
 
-    static glm::vec2 vertices[4]; // Array of mesh vertices (and texture coordinates as well)
+            void render() const override;
 
-private:
-    void initializeData() override;
-};
+            static glm::vec2 vertices[4]; // Array of mesh vertices (and texture coordinates as well)
 
-} // namespace static_meshes_2D
+        private:
+            void initializeData() override;
+        };
+
+    } // namespace static_meshes_2D
+} // namespace XE

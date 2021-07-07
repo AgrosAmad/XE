@@ -4,6 +4,8 @@
 // Project
 #include "shaderProgramManager.h"
 
+using namespace XE;
+
 ShaderProgramManager& ShaderProgramManager::getInstance()
 {
     static ShaderProgramManager spm;

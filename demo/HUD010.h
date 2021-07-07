@@ -8,42 +8,45 @@
 #include "HUDBase.h"
 #include "texture.h"
 
-/**
- * HUD for tutorial 010.
- */
-class HUD010 : public HUDBase
+namespace XE
 {
-public:
-    const static std::string CHRISTMAS_TREE_TEXTURE_KEY;
-    const static std::string SNOWFLAKE_TREE_TEXTURE_KEY;
-
-    HUD010(const OpenGLWindow& window);
-
     /**
-     * Checks, if blending in HUD is enabled.
+     * HUD for tutorial 010.
      */
-    bool isBlendingEnabled() const;
+    class HUD010 : public HUDBase
+    {
+    public:
+        const static std::string CHRISTMAS_TREE_TEXTURE_KEY;
+        const static std::string SNOWFLAKE_TREE_TEXTURE_KEY;
 
-    /**
-     * Toggles blending.
-     */
-    void toggleBlending();
+        HUD010(const OpenGLWindow& window);
 
-    /**
-     * Renders HUD.
-    */
-    void renderHUD() const override;
+        /**
+         * Checks, if blending in HUD is enabled.
+         */
+        bool isBlendingEnabled() const;
 
-private:
-    bool BlendingEnabled = true; // Flag telling, if blending is enabled
+        /**
+         * Toggles blending.
+         */
+        void toggleBlending();
 
-    /**
-     * Gets Christmas tree texture.
-     */
-    const Texture& getChristmasTreeTexture() const;
+        /**
+         * Renders HUD.
+        */
+        void renderHUD() const override;
 
-    /**
-     * Gets snowlake texture.
-     */
-    const Texture& getSnowflakeTexture() const;
-};
+    private:
+        bool BlendingEnabled = true; // Flag telling, if blending is enabled
+
+        /**
+         * Gets Christmas tree texture.
+         */
+        const Texture& getChristmasTreeTexture() const;
+
+        /**
+         * Gets snowlake texture.
+         */
+        const Texture& getSnowflakeTexture() const;
+    };
+} // namespace XE

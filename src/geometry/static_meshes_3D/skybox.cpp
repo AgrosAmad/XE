@@ -11,7 +11,7 @@
 #include "managers/samplerManager.h"
 #include "managers/shaderProgramManager.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 const std::string Skybox::SAMPLER_KEY = "skybox";
 
@@ -151,5 +151,3 @@ void Skybox::tryLoadTexture(const int sideBit) const
     }
     catch (const std::runtime_error&) {}
 }
-
-} // namespace static_meshes_3D

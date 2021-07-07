@@ -9,7 +9,7 @@
 // Project
 #include "sphere.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 Sphere::Sphere(float radius, int numSlices, int numStacks, bool withPositions, bool withTextureCoordinates, bool withNormals)
     : StaticMeshIndexed3D(withPositions, withTextureCoordinates, withNormals)
@@ -244,5 +244,3 @@ void Sphere::initializeData()
 
     _isInitialized = true;
 }
-
-} // namespace static_meshes_3D

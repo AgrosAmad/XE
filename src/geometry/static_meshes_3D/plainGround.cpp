@@ -7,7 +7,7 @@
 
 #include "managers/shaderProgramManager.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 glm::vec3 PlainGround::vertices[4] =
 {
@@ -71,5 +71,3 @@ void PlainGround::initializeData()
     setVertexAttributesPointers(numVertices);
     _isInitialized = true;
 }
-
-} // namespace static_meshes_3D

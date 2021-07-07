@@ -4,6 +4,8 @@
 // Project
 #include "OpenGLWindow.h"
 
+using namespace XE;
+
 std::map<GLFWwindow*, OpenGLWindow*> OpenGLWindow::Windows;
 
 OpenGLWindow::OpenGLWindow()

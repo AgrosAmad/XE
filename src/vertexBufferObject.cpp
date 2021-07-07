@@ -5,6 +5,8 @@
 // Project
 #include "vertexBufferObject.h"
 
+using namespace XE;
+
 void VertexBufferObject::createVBO(size_t reserveSizeBytes)
 {
     if (IsBufferCreated)

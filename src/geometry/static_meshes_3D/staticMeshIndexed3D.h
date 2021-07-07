@@ -3,25 +3,28 @@
 // Project
 #include "staticMesh3D.h"
 
-namespace static_meshes_3D {
-
-/**
- * Represents generic 3D static mesh rendered with indexed rendering.
- */
-class StaticMeshIndexed3D : public StaticMesh3D
+namespace XE
 {
-public:
-    StaticMeshIndexed3D(bool withPositions, bool withTextureCoordinates, bool withNormals);
-    virtual ~StaticMeshIndexed3D();
+    namespace static_meshes_3D {
 
-    void deleteMesh() override;
+        /**
+         * Represents generic 3D static mesh rendered with indexed rendering.
+         */
+        class StaticMeshIndexed3D : public StaticMesh3D
+        {
+        public:
+            StaticMeshIndexed3D(bool withPositions, bool withTextureCoordinates, bool withNormals);
+            virtual ~StaticMeshIndexed3D();
 
-protected:
-    VertexBufferObject _indicesVBO; // Our VBO wrapper class holding indices data
+            void deleteMesh() override;
 
-    int _numVertices = 0; // Holds the total number of generated vertices
-    int _numIndices = 0; // Holds the number of generated indices used for rendering
-    int _primitiveRestartIndex = 0; // Index of primitive restart
-};
+        protected:
+            VertexBufferObject _indicesVBO; // Our VBO wrapper class holding indices data
 
-}; // namespace static_meshes_3D
+            int _numVertices = 0; // Holds the total number of generated vertices
+            int _numIndices = 0; // Holds the number of generated indices used for rendering
+            int _primitiveRestartIndex = 0; // Index of primitive restart
+        };
+
+    }; // namespace static_meshes_3D
+} // namespace XE

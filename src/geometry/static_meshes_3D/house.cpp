@@ -10,7 +10,7 @@
 #include "managers/textureManager.h"
 #include "managers/shaderProgramManager.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 const std::string House::WALLS_TEXTURE_KEY = "house_walls";
 const std::string House::DOOR_WALL_TEXTURE_KEY = "house_door_wall";
@@ -77,5 +77,3 @@ void House::render(const glm::vec3& position, float rotationAngle) const
     mainProgram[ShaderConstants::modelMatrix()] = modelMatrixTop;
     pyramid.render();
 }
-
-} // namespace static_meshes_3D

@@ -2,6 +2,7 @@
 #include "localWindow.h"
 
 using namespace std;
+using namespace XE;
 
 int main()
 {

@@ -1,7 +1,7 @@
 // Project
 #include "staticMeshIndexed3D.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 StaticMeshIndexed3D::StaticMeshIndexed3D(bool withPositions, bool withTextureCoordinates, bool withNormals)
     : StaticMesh3D(withPositions, withTextureCoordinates, withNormals) {}
@@ -21,5 +21,3 @@ void StaticMeshIndexed3D::deleteMesh()
         StaticMesh3D::deleteMesh();
     }
 }
-
-} // namespace static_meshes_3D

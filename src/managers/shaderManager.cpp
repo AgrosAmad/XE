@@ -4,6 +4,8 @@
 // Project
 #include "shaderManager.h"
 
+using namespace XE;
+
 ShaderManager& ShaderManager::getInstance()
 {
     static ShaderManager sm;

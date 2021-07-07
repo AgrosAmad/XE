@@ -10,6 +10,8 @@
 // GLM
 #include <glm/gtc/matrix_transform.hpp>
 
+using namespace XE;
+
 const std::string HUDBase::DEFAULT_FONT_KEY = "default";
 const std::string HUDBase::ORTHO_2D_PROGRAM_KEY = "ortho_2D";
 const std::string HUDBase::HUD_SAMPLER_KEY = "HUD";

@@ -6,47 +6,50 @@
 // Project
 #include "../staticMeshIndexed3D.h"
 
-namespace static_meshes_3D {
-
-/**
- * Sphere static mesh with given number of slices, stacks and radius.
- */
-class Sphere : public StaticMeshIndexed3D
+namespace XE
 {
-public:
-    Sphere(float radius, int numSlices, int numStacks, bool withPositions = true, bool withTextureCoordinates = true, bool withNormals = true);
+    namespace static_meshes_3D {
 
-    void render() const override;
-    void renderPoints() const override;
+        /**
+         * Sphere static mesh with given number of slices, stacks and radius.
+         */
+        class Sphere : public StaticMeshIndexed3D
+        {
+        public:
+            Sphere(float radius, int numSlices, int numStacks, bool withPositions = true, bool withTextureCoordinates = true, bool withNormals = true);
 
-    /**
-     * Gets sphere radius.
-     */
-    float getRadius() const;
+            void render() const override;
+            void renderPoints() const override;
 
-    /**
-     * Gets number of sphere slices (horizontal or also known as latitude subdivisions).
-     */
-    int getNumSlices() const;
+            /**
+             * Gets sphere radius.
+             */
+            float getRadius() const;
 
-    /**
-     * Gets number of sphere stacks (vertical or also known as longitude subdivisions).
-     */
-    int getNumStacks() const;
+            /**
+             * Gets number of sphere slices (horizontal or also known as latitude subdivisions).
+             */
+            int getNumSlices() const;
 
-private:
-    float _radius; // Sphere radius
-    int _numSlices; // Number of slices
-    int _numStacks; // Number of stacks
+            /**
+             * Gets number of sphere stacks (vertical or also known as longitude subdivisions).
+             */
+            int getNumStacks() const;
 
-    GLuint _numPoleIndices; // Number of indices to render poles with GL_TRIANGLES
-    GLuint _numBodyIndices; // Number of indices to render body
+        private:
+            float _radius; // Sphere radius
+            int _numSlices; // Number of slices
+            int _numStacks; // Number of stacks
 
-    GLuint _northPoleIndexOffset; // Index offset to render north pole (always 0)
-    GLuint _bodyIndexOffset; // Index offset to render body
-    GLuint _southPoleIndexOffset; // Index offset to render south pole
+            GLuint _numPoleIndices; // Number of indices to render poles with GL_TRIANGLES
+            GLuint _numBodyIndices; // Number of indices to render body
 
-    void initializeData() override;
-};
+            GLuint _northPoleIndexOffset; // Index offset to render north pole (always 0)
+            GLuint _bodyIndexOffset; // Index offset to render body
+            GLuint _southPoleIndexOffset; // Index offset to render south pole
 
-} // namespace static_meshes_3D
+            void initializeData() override;
+        };
+
+    } // namespace static_meshes_3D
+} // namespace XE

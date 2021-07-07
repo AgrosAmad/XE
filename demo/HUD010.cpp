@@ -6,6 +6,8 @@
 #include "managers/textureManager.h"
 #include "managers/matrixManager.h"
 
+using namespace XE;
+
 const std::string HUD010::CHRISTMAS_TREE_TEXTURE_KEY = "christmas_tree";
 const std::string HUD010::SNOWFLAKE_TREE_TEXTURE_KEY = "snowflake";
 

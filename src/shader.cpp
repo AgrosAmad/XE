@@ -7,6 +7,8 @@
 #include "shader.h"
 #include "stringUtils.h"
 
+using namespace XE;
+
 Shader::~Shader()
 {
     deleteShader();

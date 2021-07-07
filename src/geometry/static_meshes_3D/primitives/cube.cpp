@@ -4,7 +4,7 @@
 // Project
 #include "cube.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 glm::vec3 Cube::vertices[36] =
 {
@@ -131,5 +131,3 @@ void Cube::initializeData()
     setVertexAttributesPointers(numVertices);
     _isInitialized = true;
 }
-
-} // namespace static_meshes_3D

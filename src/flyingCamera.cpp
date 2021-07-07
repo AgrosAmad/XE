@@ -7,6 +7,8 @@
 // Project
 #include "flyingCamera.h"
 
+using namespace XE;
+
 FlyingCamera::FlyingCamera(const glm::vec3& position, const glm::vec3& viewPoint, const glm::vec3& upVector, float moveSpeed, float mouseSensitivity)
     : Position(position)
     , ViewPoint(viewPoint)

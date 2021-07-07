@@ -4,7 +4,7 @@
 // Project
 #include "staticMesh3D.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 const int StaticMesh3D::POSITION_ATTRIBUTE_INDEX           = 0;
 const int StaticMesh3D::TEXTURE_COORDINATE_ATTRIBUTE_INDEX = 1;
@@ -90,5 +90,3 @@ void StaticMesh3D::setVertexAttributesPointers(int numVertices)
         offset += sizeof(glm::vec3)*numVertices;
     }
 }
-
-} // namespace static_meshes_3D

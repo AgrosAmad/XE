@@ -8,7 +8,7 @@
 // Project
 #include "cylinder.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 Cylinder::Cylinder(float radius, int numSlices, float height, bool withPositions, bool withTextureCoordinates, bool withNormals)
     : StaticMesh3D(withPositions, withTextureCoordinates, withNormals)
@@ -181,5 +181,3 @@ void Cylinder::renderPoints() const
     glBindVertexArray(_vao);
     glDrawArrays(GL_POINTS, 0, _numVerticesTotal);
 }
-
-} // namespace static_meshes_3D

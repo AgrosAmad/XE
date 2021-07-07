@@ -11,58 +11,61 @@
 // Project
 #include "shaderProgram.h"
 
-/**
- * Singleton class that manages and keeps track of all shader programs in the program.
- */
-class ShaderProgramManager
+namespace XE
 {
-public:
 	/**
-	 * Gets the one and only instance of the shader program manager.
+	 * Singleton class that manages and keeps track of all shader programs in the program.
 	 */
-	static ShaderProgramManager& getInstance();
-	
-	/**
-	 * Creates new shader program and stores it with specified key.
-	 *
-	 * @param key  Key to store shader program with
-	 *
-	 * @return Shader program instance with specified key.
-	 */
-	ShaderProgram& createShaderProgram(const std::string& key);
+	class ShaderProgramManager
+	{
+	public:
+		/**
+		 * Gets the one and only instance of the shader program manager.
+		 */
+		static ShaderProgramManager& getInstance();
 
-	/**
-	 * Retrieves shader program with a specified key.
-	 *
-	 * @param key  Key to get shader program from
-	 *
-	 * @return Shader program instance from a specified key.
-	 */
-	ShaderProgram& getShaderProgram(const std::string& key) const;
+		/**
+		 * Creates new shader program and stores it with specified key.
+		 *
+		 * @param key  Key to store shader program with
+		 *
+		 * @return Shader program instance with specified key.
+		 */
+		ShaderProgram& createShaderProgram(const std::string& key);
 
-	/**
-	 * Performs linkage of all existing shader programs.
-	 */
-	void linkAllPrograms();
+		/**
+		 * Retrieves shader program with a specified key.
+		 *
+		 * @param key  Key to get shader program from
+		 *
+		 * @return Shader program instance from a specified key.
+		 */
+		ShaderProgram& getShaderProgram(const std::string& key) const;
 
-	/**
-	 * Deletes all the shader programs loaded and clears the shader program cache.
-	 */
-	void clearShaderProgramCache();
+		/**
+		 * Performs linkage of all existing shader programs.
+		 */
+		void linkAllPrograms();
 
-private:
-	ShaderProgramManager() {} // Private constructor to make class singleton
-	ShaderProgramManager(const ShaderProgramManager&) = delete; // No copy constructor allowed
-	void operator=(const ShaderProgramManager&) = delete; // No copy assignment allowed
+		/**
+		 * Deletes all the shader programs loaded and clears the shader program cache.
+		 */
+		void clearShaderProgramCache();
 
-	/**
-	 * Checks, if shader program with specified key exists.
-	 *
-	 * @param  key  Shader program key to check existence of
-	 *
-	 * @return True if shader program exists, or false otherwise.
-	 */
-	bool containsShaderProgram(const std::string& key) const;
+	private:
+		ShaderProgramManager() {} // Private constructor to make class singleton
+		ShaderProgramManager(const ShaderProgramManager&) = delete; // No copy constructor allowed
+		void operator=(const ShaderProgramManager&) = delete; // No copy assignment allowed
 
-	std::map<std::string, std::unique_ptr<ShaderProgram>> ShaderProgramCache; // Shader program cache - stores shader programs within their keys in std::map
-};
+		/**
+		 * Checks, if shader program with specified key exists.
+		 *
+		 * @param  key  Shader program key to check existence of
+		 *
+		 * @return True if shader program exists, or false otherwise.
+		 */
+		bool containsShaderProgram(const std::string& key) const;
+
+		std::map<std::string, std::unique_ptr<ShaderProgram>> ShaderProgramCache; // Shader program cache - stores shader programs within their keys in std::map
+	};
+} // namespace XE

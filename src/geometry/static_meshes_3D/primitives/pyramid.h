@@ -6,24 +6,27 @@
 // Project
 #include "../staticMesh3D.h"
 
-namespace static_meshes_3D {
-
-/**
- * Pyramid static mesh of unit size.
- */
-class Pyramid : public StaticMesh3D
+namespace XE
 {
-public:
-	Pyramid(bool withPositions = true, bool withTextureCoordinates = true, bool withNormals = true);
+	namespace static_meshes_3D {
 
-	void render() const override;
-	void renderPoints() const override;
+		/**
+		 * Pyramid static mesh of unit size.
+		 */
+		class Pyramid : public StaticMesh3D
+		{
+		public:
+			Pyramid(bool withPositions = true, bool withTextureCoordinates = true, bool withNormals = true);
 
-	static glm::vec3 vertices[12]; // Array of mesh vertices
-	static glm::vec2 textureCoordinates[3]; // Array of mesh texture coordinates
+			void render() const override;
+			void renderPoints() const override;
 
-private:
-	void initializeData() override;
-};
+			static glm::vec3 vertices[12]; // Array of mesh vertices
+			static glm::vec2 textureCoordinates[3]; // Array of mesh texture coordinates
 
-} // namespace static_meshes_3D
+		private:
+			void initializeData() override;
+		};
+
+	} // namespace static_meshes_3D
+} // namespace XE

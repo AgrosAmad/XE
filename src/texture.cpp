@@ -9,6 +9,8 @@
 // Project
 #include "texture.h"
 
+using namespace XE;
+
 Texture::~Texture()
 {
     deleteTexture();

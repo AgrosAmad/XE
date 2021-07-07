@@ -11,7 +11,7 @@
 #include "stringUtils.h"
 #include "managers/textureManager.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 AssimpModel::AssimpModel(const std::string& filePath, const std::string& defaultTextureName, bool withPositions, bool withTextureCoordinates, bool withNormals, const glm::mat4& modelTransformMatrix)
     : StaticMesh3D(withPositions, withTextureCoordinates, withNormals)
@@ -218,5 +218,3 @@ std::string AssimpModel::aiStringToStdString(const aiString& aiStringStruct)
 
     return dataPtr;
 }
-
-} // namespace static_meshes_3D

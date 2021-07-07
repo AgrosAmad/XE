@@ -9,57 +9,61 @@
 #include "shaderProgram.h"
 #include "sampler.h"
 
-/**
- * Base class for rendering HUD (head-up display) over scene.
- */
-class HUDBase
+
+namespace XE
 {
-public:
-    static const std::string DEFAULT_FONT_KEY;
-    static const std::string ORTHO_2D_PROGRAM_KEY; // Key for shader program for rendering in 2D
-    static const std::string HUD_SAMPLER_KEY; // Key for sampler used for HUD objects
-
-    HUDBase(const OpenGLWindow& window);
-
     /**
-     * Renders HUD.
+     * Base class for rendering HUD (head-up display) over scene.
      */
-    virtual void renderHUD() const = 0;
+    class HUDBase
+    {
+    public:
+        static const std::string DEFAULT_FONT_KEY;
+        static const std::string ORTHO_2D_PROGRAM_KEY; // Key for shader program for rendering in 2D
+        static const std::string HUD_SAMPLER_KEY; // Key for sampler used for HUD objects
 
-protected:
-    const OpenGLWindow& Window; // OpenGL Window class instance, for which HUD is rendered
+        HUDBase(const OpenGLWindow& window);
 
-    /**
-     * Gets HUD width.
-     */
-    int getWidth() const;
+        /**
+         * Renders HUD.
+         */
+        virtual void renderHUD() const = 0;
 
-    /**
-     * Gets HUD height.
-     */
-    int getHeight() const;
+    protected:
+        const OpenGLWindow& Window; // OpenGL Window class instance, for which HUD is rendered
 
-    /**
-     * Renders 2D textured quad at specified position with specified size. Possibility to render from right or top as well.
-     *
-     * @param x               Rendering position from left or from right edge (depending on fromRight flag)
-     * @param y               Rendering position from top or bottom edge (depending on fromTop flag)
-     * @param renderedWidth   Width of rendered quad (in pixels)
-     * @param renderedHeight  Height of rendered quad (in pixels)
-     * @param fromRight       Flag telling, if you want to render from right side instead of from left side
-     * @param fromTop         Flag telling, if you want to render from top side instead of from bottom side
-     */
-    void renderTexturedQuad2D(int x, int y, int renderedWidth, int renderedHeight, bool fromRight = false, bool fromTop = false) const;
+        /**
+         * Gets HUD width.
+         */
+        int getWidth() const;
 
-    /**
-     * Gets shader program for 2D rendering.
-     */
-    ShaderProgram& getOrtho2DShaderProgram() const;
+        /**
+         * Gets HUD height.
+         */
+        int getHeight() const;
 
-    /**
-     * Gets HUD sampler.
-     */
-    const Sampler& getHUDSampler() const;
+        /**
+         * Renders 2D textured quad at specified position with specified size. Possibility to render from right or top as well.
+         *
+         * @param x               Rendering position from left or from right edge (depending on fromRight flag)
+         * @param y               Rendering position from top or bottom edge (depending on fromTop flag)
+         * @param renderedWidth   Width of rendered quad (in pixels)
+         * @param renderedHeight  Height of rendered quad (in pixels)
+         * @param fromRight       Flag telling, if you want to render from right side instead of from left side
+         * @param fromTop         Flag telling, if you want to render from top side instead of from bottom side
+         */
+        void renderTexturedQuad2D(int x, int y, int renderedWidth, int renderedHeight, bool fromRight = false, bool fromTop = false) const;
 
-    static_meshes_2D::Quad TexturedQuad; // Static mesh for rendering 2D quad
-};
+        /**
+         * Gets shader program for 2D rendering.
+         */
+        ShaderProgram& getOrtho2DShaderProgram() const;
+
+        /**
+         * Gets HUD sampler.
+         */
+        const Sampler& getHUDSampler() const;
+
+        static_meshes_2D::Quad TexturedQuad; // Static mesh for rendering 2D quad
+    };
+} // namespace XE

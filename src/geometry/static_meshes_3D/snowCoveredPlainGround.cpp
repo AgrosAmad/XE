@@ -13,7 +13,7 @@
 #include "managers/samplerManager.h"
 #include "managers/matrixManager.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 SnowCoveredPlainGround::SnowCoveredPlainGround(bool withPositions, bool withTextureCoordinates, bool withNormals)
 	: PlainGround(withPositions, withTextureCoordinates, withNormals)
@@ -66,5 +66,3 @@ void SnowCoveredPlainGround::render() const
 
     PlainGround::render();
 }
-
-} // namespace static_meshes_3D

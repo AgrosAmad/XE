@@ -3,6 +3,8 @@
 #include "uniform.h"
 #include "shaderProgram.h"
 
+using namespace XE;
+
 // Family of functions setting vec2 uniforms
 
 Uniform::Uniform() : MasterShaderProgram(nullptr), Location(-1)

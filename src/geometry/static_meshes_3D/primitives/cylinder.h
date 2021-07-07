@@ -3,45 +3,48 @@
 // Project
 #include "../staticMesh3D.h"
 
-namespace static_meshes_3D {
-
-/**
- * Cylinder static mesh with given radius, number of slices and height.
- */
-class Cylinder : public StaticMesh3D
+namespace XE
 {
-public:
-    Cylinder(float radius, int numSlices, float height,
-        bool withPositions = true, bool withTextureCoordinates = true, bool withNormals = true);
+    namespace static_meshes_3D {
 
-    void render() const override;
-    void renderPoints() const override;
+        /**
+         * Cylinder static mesh with given radius, number of slices and height.
+         */
+        class Cylinder : public StaticMesh3D
+        {
+        public:
+            Cylinder(float radius, int numSlices, float height,
+                bool withPositions = true, bool withTextureCoordinates = true, bool withNormals = true);
 
-    /**
-     * Gets cylinder radius.
-     */
-    float getRadius() const;
+            void render() const override;
+            void renderPoints() const override;
 
-    /**
-     * Gets number of cylinder slices.
-     */
-    int getSlices() const;
+            /**
+             * Gets cylinder radius.
+             */
+            float getRadius() const;
 
-    /**
-     * Gets cylinder height.
-     */
-    float getHeight() const;
+            /**
+             * Gets number of cylinder slices.
+             */
+            int getSlices() const;
 
-private:
-    float _radius; // Cylinder radius (distance from the center of cylinder to surface)
-    int _numSlices; // Number of cylinder slices
-    float _height; // Height of the cylinder
+            /**
+             * Gets cylinder height.
+             */
+            float getHeight() const;
 
-    int _numVerticesSide; // How many vertices to render side of the cylinder
-    int _numVerticesTopBottom; // How many vertices to render top / bottom of the cylinder
-    int _numVerticesTotal; // Just a sum of both numbers above
-    
-    void initializeData() override;
-};
+        private:
+            float _radius; // Cylinder radius (distance from the center of cylinder to surface)
+            int _numSlices; // Number of cylinder slices
+            float _height; // Height of the cylinder
 
-} // namespace static_meshes_3D
+            int _numVerticesSide; // How many vertices to render side of the cylinder
+            int _numVerticesTopBottom; // How many vertices to render top / bottom of the cylinder
+            int _numVerticesTotal; // Just a sum of both numbers above
+
+            void initializeData() override;
+        };
+
+    } // namespace static_meshes_3D
+} // namespace XE

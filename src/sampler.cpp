@@ -4,6 +4,8 @@
 // Project
 #include "sampler.h"
 
+using namespace XE;
+
 Sampler::~Sampler()
 {
     deleteSampler();

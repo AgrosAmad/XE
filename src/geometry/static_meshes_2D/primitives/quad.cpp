@@ -4,7 +4,7 @@
 // Project
 #include "quad.h"
 
-namespace static_meshes_2D {
+using namespace XE::static_meshes_2D;
 
 glm::vec2 Quad::vertices[4] =
 {
@@ -58,5 +58,3 @@ void Quad::initializeData()
     setVertexAttributesPointers(numVertices);
     _isInitialized = true;
 }
-
-} // namespace static_meshes_2D

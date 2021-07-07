@@ -9,7 +9,8 @@
 #include "managers/shaderManager.h"
 #include "managers/shaderProgramManager.h"
 
-namespace static_meshes_3D {
+using namespace XE;
+using namespace static_meshes_3D;
 
 const std::string HeightmapWithFog::MULTILAYER_SHADER_PROGRAM_WITH_FOG_KEY = "multilayer_heightmap_fog";
 
@@ -90,5 +91,3 @@ void HeightmapWithFog::renderMultilayered(const std::vector<std::string>& textur
     // Finally render heightmap
     render();
 }
-
-} // namespace static_meshes_3D

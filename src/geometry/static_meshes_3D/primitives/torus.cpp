@@ -4,7 +4,7 @@
 // Project
 #include "torus.h"
 
-namespace static_meshes_3D {
+using namespace XE::static_meshes_3D;
 
 Torus::Torus(int stacks, int slices, float radius, float tubeRadius, bool withPositions, bool withTextureCoordinates, bool withNormals)
     : StaticMeshIndexed3D(withPositions, withTextureCoordinates, withNormals)
@@ -193,5 +193,3 @@ float Torus::getTubeRadius() const
 {
     return _tubeRadius;
 }
-
-} // namespace static_meshes_3D

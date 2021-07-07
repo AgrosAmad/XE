@@ -4,6 +4,8 @@
 // Project
 #include "textureManager.h"
 
+using namespace XE;
+
 TextureManager& TextureManager::getInstance()
 {
     static TextureManager tm;

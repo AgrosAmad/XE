@@ -1,6 +1,8 @@
 // Project
 #include "matrixManager.h"
 
+using namespace XE;
+
 MatrixManager& MatrixManager::getInstance()
 {
     static MatrixManager mm;
