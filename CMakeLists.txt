@@ -22,6 +22,13 @@ target_include_directories( ${EXEC_NAME} PUBLIC
 	"${PROJECT_SOURCE_DIR}/src"
 )
 
+# MAKE FILTERS IN VISUAL
+foreach(source IN LISTS SOURCES_XE)
+    get_filename_component(source_path "${source}" PATH)
+    string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+    source_group("${source_path_msvc}" FILES "${source}")
+endforeach()
+
 # BIN DIR
 SET (XE_BIN_DIR "${CMAKE_CURRENT_LIST_DIR}/bin")
 
