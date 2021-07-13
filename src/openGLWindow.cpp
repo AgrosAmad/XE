@@ -65,6 +65,14 @@ bool OpenGLWindow::createOpenGLWindow(const std::string& windowTitle, int majorV
 
     glfwSetScrollCallback(Window, onMouseWheelScrollStatic);
     Windows[Window] = this;
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(Window, true);
+    ImGui_ImplOpenGL3_Init("#version 440");
+
     return true;
 }
 
