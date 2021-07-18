@@ -7,14 +7,18 @@
 // Project
 #include "flyingCamera.h"
 
+// Window management
+#include "openGLWindow.h"
+
 using namespace XE;
 
-FlyingCamera::FlyingCamera(const glm::vec3& position, const glm::vec3& viewPoint, const glm::vec3& upVector, float moveSpeed, float mouseSensitivity)
+FlyingCamera::FlyingCamera(OpenGLWindow* localWindow, const glm::vec3& position, const glm::vec3& viewPoint, const glm::vec3& upVector, float moveSpeed, float mouseSensitivity)
     : Position(position)
     , ViewPoint(viewPoint)
     , UpVector(upVector)
     , MoveSpeed(moveSpeed)
     , MouseSensitivity(mouseSensitivity)
+    , Window(localWindow)
 {
     // Standard WSAD controls, as you are used to from games :)
     setControls(GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D, GLFW_MOUSE_BUTTON_MIDDLE);
@@ -64,42 +68,46 @@ glm::vec3 FlyingCamera::getUpVector() const
     return UpVector;
 }
 
-void FlyingCamera::update(const std::function<bool(int)>& keyMouseInputFunc,
-    const std::function<bool(int)>& keyInputFunc,
-    const std::function<glm::i32vec2()>& getCursorPosFunc,
-    const std::function<void(const glm::i32vec2&)>& setCursorPosFunc,
-    const std::function<float(float)>& speedCorrectionFunc)
+void FlyingCamera::update()
 {
-    if (keyInputFunc(ForwardKeyCode)) {
-        moveBy(speedCorrectionFunc(MoveSpeed));
+
+    if (Window->keyPressed(ForwardKeyCode)) 
+    {
+        moveBy(Window->sof(MoveSpeed));
     }
 
-    if (keyInputFunc(BackwardKeyCode)) {
-        moveBy(-speedCorrectionFunc(MoveSpeed));
+    if (Window->keyPressed(BackwardKeyCode)) 
+    {
+        moveBy(-Window->sof(MoveSpeed));
     }
 
-    if (keyInputFunc(StrafeLeftKeyCode)) {
-        strafeBy(-speedCorrectionFunc(MoveSpeed));
+    if (Window->keyPressed(StrafeLeftKeyCode)) 
+    {
+        strafeBy(-Window->sof(MoveSpeed));
     }
 
-    if (keyInputFunc(StrafeRightKeyCode)) {
-        strafeBy(speedCorrectionFunc(MoveSpeed));
+    if (Window->keyPressed(StrafeRightKeyCode)) 
+    {
+        strafeBy(Window->sof(MoveSpeed));
     }
 
-    const auto curMousePosition = getCursorPosFunc();
+    double curPosX, curPosY;
+    glfwGetCursorPos(Window->getWindow(), &curPosX, &curPosY);
+    const auto curMousePosition = glm::i32vec2(curPosX, curPosY);
     const auto delta = WindowCenterPosition - curMousePosition;
 
-    if (delta.x != 0 && keyMouseInputFunc(CameraRotationKeyCode))
+    if (delta.x != 0 && Window->keyMousePressed(CameraRotationKeyCode))
     {
         rotateLeftRight(static_cast<float>(delta.x) * MouseSensitivity);
     }
 
-    if (delta.y != 0 && keyMouseInputFunc(CameraRotationKeyCode))
+    if (delta.y != 0 && Window->keyMousePressed(CameraRotationKeyCode))
     {
         rotateUpDown(static_cast<float>(delta.y) * MouseSensitivity);
     }
 
-    setCursorPosFunc(WindowCenterPosition);
+    glfwSetCursorPos(Window->getWindow(), WindowCenterPosition.x, WindowCenterPosition.y);
+
 }
 
 void FlyingCamera::moveBy(float distance)

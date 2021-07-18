@@ -116,11 +116,7 @@ void LocalWindow::updateScene()
 	glfwGetWindowSize(getWindow(), &width, &height);
 	Camera.setWindowCenterPosition(glm::i32vec2(posX + width / 2, posY + height / 2));
 
-	Camera.update([this](int keyMouseCode) {return this->keyMousePressed(keyMouseCode); },
-		[this](int keyCode) {return this->keyPressed(keyCode); },
-		[this]() {double curPosX, curPosY; glfwGetCursorPos(this->getWindow(), &curPosX, &curPosY); return glm::u32vec2(curPosX, curPosY); },
-		[this](const glm::i32vec2& pos) {glfwSetCursorPos(this->getWindow(), pos.x, pos.y); },
-		[this](float f) {return this->sof(f); });
+	Camera.update();
 
 	std::string windowTitleWithFPS = "X Engine: " + std::to_string(getFPS()) 
 	    + ", VSync: " + (isVerticalSynchronizationEnabled() ? "On" : "Off") + " (Press F3 to toggle)"

@@ -12,10 +12,13 @@
  */
 namespace XE
 {
+
+    class OpenGLWindow; // For cross-declaration;
+
     class FlyingCamera
     {
     public:
-        FlyingCamera(const glm::vec3& position, const glm::vec3& viewPoint, const glm::vec3& upVector, float moveSpeed = 10.0f, float mouseSensitivity = 0.15f);
+        FlyingCamera(OpenGLWindow* localWindow, const glm::vec3& position, const glm::vec3& viewPoint, const glm::vec3& upVector, float moveSpeed = 10.0f, float mouseSensitivity = 0.15f);
 
         /**
          * Sets movement speed of camera (how fast camera moves forward / backward and strafes left / right).
@@ -76,17 +79,8 @@ namespace XE
 
         /**
          * Updates camera - reacts on key presses and updates camera's internal state (position, view vector...).
-         *
-         * @param keyInputFunc         Function that detects key presses
-         * @param getCursorPosFunc     Function that retrieves current cursor position
-         * @param setCursorPosFunc     Function that sets current cursor position
-         * @param speedCorrectionFunc  Function that corrects floating point value according to the time passed
          */
-        void update(const std::function<bool(int)>& keyMouseInputFunc,
-            const std::function<bool(int)>& keyInputFunc,
-            const std::function<glm::i32vec2()>& getCursorPosFunc,
-            const std::function<void(const glm::i32vec2&)>& setCursorPosFunc,
-            const std::function<float(float)>& speedCorrectionFunc);
+        void update();
 
     private:
         /**
@@ -116,6 +110,8 @@ namespace XE
          * @param angleInDegrees Angle to rotate by (in degrees)
          */
         void rotateUpDown(float angleInDegrees);
+
+        OpenGLWindow* Window; // Window in which this camera is active
 
         glm::vec3 Position; // Camera's position (eye position)
         glm::vec3 ViewPoint; // Viewpoint - where does camera look to

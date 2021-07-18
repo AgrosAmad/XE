@@ -43,7 +43,7 @@ namespace XE
         std::unique_ptr<static_meshes_3D::PlainGround> PlainGround;
 
         // Camera
-        FlyingCamera Camera = FlyingCamera(glm::vec3(0.0f, 8.0f, 20.0f), glm::vec3(0.0f, 8.0f, 19.0f), glm::vec3(0.0f, 1.0f, 0.0f), 50);
+        FlyingCamera Camera = FlyingCamera(this, glm::vec3(0.0f, 8.0f, 20.0f), glm::vec3(0.0f, 8.0f, 19.0f), glm::vec3(0.0f, 1.0f, 0.0f), 50);
 
         // Transform scene
         float rotationAngleRad = 0.0f;
