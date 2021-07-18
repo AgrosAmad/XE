@@ -47,17 +47,6 @@ void LocalWindow::renderScene()
 	auto& mm = MatrixManager::getInstance();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplGlfw_NewFrame();
-	ImGui::NewFrame();
-
-	ImGui::Begin("fsf");
-	ImGui::Text("fsdf");
-	ImGui::End();
-
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
 	// Set matrices in matrix manager
 	mm.setProjectionMatrix(getProjectionMatrix());
 	mm.setViewMatrix(Camera.getViewMatrix());
@@ -97,6 +86,17 @@ void LocalWindow::renderScene()
 		TextureManager::getInstance().getTexture("metal").bind(0);
 		Torus->render();
 	}
+
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplGlfw_NewFrame();
+	ImGui::NewFrame();
+
+	ImGui::Begin("fsf");
+	ImGui::Text("fsdf");
+	ImGui::End();
+
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 void LocalWindow::updateScene()
@@ -116,7 +116,8 @@ void LocalWindow::updateScene()
 	glfwGetWindowSize(getWindow(), &width, &height);
 	Camera.setWindowCenterPosition(glm::i32vec2(posX + width / 2, posY + height / 2));
 
-	Camera.update([this](int keyCode) {return this->keyPressed(keyCode); },
+	Camera.update([this](int keyMouseCode) {return this->keyMousePressed(keyMouseCode); },
+		[this](int keyCode) {return this->keyPressed(keyCode); },
 		[this]() {double curPosX, curPosY; glfwGetCursorPos(this->getWindow(), &curPosX, &curPosY); return glm::u32vec2(curPosX, curPosY); },
 		[this](const glm::i32vec2& pos) {glfwSetCursorPos(this->getWindow(), pos.x, pos.y); },
 		[this](float f) {return this->sof(f); });
@@ -140,5 +141,9 @@ void LocalWindow::releaseScene()
 	Pyramid.reset();
 	Torus.reset();
 	PlainGround.reset();
+
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
 
 }

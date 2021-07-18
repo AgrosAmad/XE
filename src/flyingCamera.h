@@ -39,7 +39,7 @@ namespace XE
          * @param strafeLeftKeyCode   Key code to strafe left
          * @param strafeRightKeyCode  Key code to strafe right
          */
-        void setControls(int forwardKeyCode, int backwardKeyCode, int strafeLeftKeyCode, int strafeRightKeyCode);
+        void setControls(int forwardKeyCode, int backwardKeyCode, int strafeLeftKeyCode, int strafeRightKeyCode, int cameraRotationKeyCode);
 
         /**
          * Sets center of window position, in pixels.
@@ -82,7 +82,8 @@ namespace XE
          * @param setCursorPosFunc     Function that sets current cursor position
          * @param speedCorrectionFunc  Function that corrects floating point value according to the time passed
          */
-        void update(const std::function<bool(int)>& keyInputFunc,
+        void update(const std::function<bool(int)>& keyMouseInputFunc,
+            const std::function<bool(int)>& keyInputFunc,
             const std::function<glm::i32vec2()>& getCursorPosFunc,
             const std::function<void(const glm::i32vec2&)>& setCursorPosFunc,
             const std::function<float(float)>& speedCorrectionFunc);
@@ -128,5 +129,6 @@ namespace XE
         int BackwardKeyCode; // Key code to move backward
         int StrafeLeftKeyCode; // Key code to rotate left
         int StrafeRightKeyCode; // Key code to rotate right
+        int CameraRotationKeyCode; // Key code to activate camera rotation with mouse
     };
 } // namespace XE

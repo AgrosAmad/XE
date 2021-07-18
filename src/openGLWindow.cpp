@@ -81,6 +81,11 @@ bool OpenGLWindow::keyPressed(int keyCode) const
     return glfwGetKey(Window, keyCode) == GLFW_PRESS;
 }
 
+bool XE::OpenGLWindow::keyMousePressed(int keyCode) const
+{
+    return glfwGetMouseButton(Window, keyCode) == GLFW_PRESS;
+}
+
 bool OpenGLWindow::keyPressedOnce(int keyCode)
 {
     bool result = false;

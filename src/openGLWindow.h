@@ -91,6 +91,15 @@ namespace XE
         bool keyPressed(int keyCode) const;
 
         /**
+        * Checks, if specified mouse key is currently pressed.
+        *
+        * @param keyCode  GLFW code of the key to check
+        *
+        * @return True if key is pressed or false otherwise.
+        */
+        bool keyMousePressed(int keyCode) const;
+
+        /**
          * Checks, if specified key was pressed. This function won't return true again, unless the key has been released and pressed again.
          *
          * @param keyCode  GLFW code of the key to check
