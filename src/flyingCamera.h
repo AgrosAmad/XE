@@ -118,6 +118,7 @@ namespace XE
         glm::vec3 UpVector; // Up vector of the camera
 
         glm::i32vec2 WindowCenterPosition; // Center of the window (to restore cursor position every frame to)
+        glm::i32vec2 MouseLastPos; // Last mouse position (to compute movement)
         float MouseSensitivity; // Mouse sensitivity in degrees per pixel
 
         float MoveSpeed; // Speed of camera (both for going forward / backward and for strafing left / right)

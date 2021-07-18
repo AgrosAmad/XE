@@ -70,7 +70,7 @@ glm::vec3 FlyingCamera::getUpVector() const
 
 void FlyingCamera::update()
 {
-
+    // Moves camera around
     if (Window->keyPressed(ForwardKeyCode)) 
     {
         moveBy(Window->sof(MoveSpeed));
@@ -91,10 +91,23 @@ void FlyingCamera::update()
         strafeBy(Window->sof(MoveSpeed));
     }
 
+    // Rotates camera with mouse movement
     double curPosX, curPosY;
     glfwGetCursorPos(Window->getWindow(), &curPosX, &curPosY);
     const auto curMousePosition = glm::i32vec2(curPosX, curPosY);
-    const auto delta = WindowCenterPosition - curMousePosition;
+    const auto delta = MouseLastPos - curMousePosition;
+
+    // Hides mouse when rotating camera
+    if (Window->keyMousePressed(CameraRotationKeyCode))
+    {
+        glfwSetInputMode(Window->getWindow(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+        glfwSetCursorPos(Window->getWindow(), MouseLastPos.x, MouseLastPos.y);
+    }
+    else
+    {
+        glfwSetInputMode(Window->getWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        MouseLastPos = curMousePosition;
+    }
 
     if (delta.x != 0 && Window->keyMousePressed(CameraRotationKeyCode))
     {
@@ -106,7 +119,7 @@ void FlyingCamera::update()
         rotateUpDown(static_cast<float>(delta.y) * MouseSensitivity);
     }
 
-    glfwSetCursorPos(Window->getWindow(), WindowCenterPosition.x, WindowCenterPosition.y);
+    //glfwSetCursorPos(Window->getWindow(), WindowCenterPosition.x, WindowCenterPosition.y);
 
 }
 
