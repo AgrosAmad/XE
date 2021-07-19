@@ -5,6 +5,8 @@
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/glm.hpp>
+
+// STL
 #include <string>
 #include <vector>
 
@@ -26,19 +28,19 @@ namespace XE
 		/*
 		* Misc. functions for positioning entity in space
 		*/
-		virtual void Translate(const glm::vec3& t);
-		virtual void Scale(const glm::vec3& s);
-		virtual void Scale(const float& s);
-		virtual void Rotate(const glm::vec3& euler);
-		virtual void SetViewDir(const glm::vec3& dir);
-		virtual void SetOrientation(const glm::quat& q);
+		virtual void translate(const glm::vec3& t);
+		virtual void scale(const glm::vec3& s);
+		virtual void scale(const float& s);
+		virtual void rotate(const glm::vec3& euler);
+		virtual void setViewDir(const glm::vec3& dir);
+		virtual void setOrientation(const glm::quat& q);
 
-		virtual glm::vec3 GetCenter();
-		virtual glm::vec3 GetScale();
-		virtual glm::vec3 GetEuler();
-		virtual glm::vec3 GetViewDir();
-		virtual glm::vec3 GetUpVector();
-		virtual glm::quat GetOrientation();
+		virtual glm::vec3 getCenter();
+		virtual glm::vec3 getScale();
+		virtual glm::vec3 getEuler();
+		virtual glm::vec3 getViewDir();
+		virtual glm::vec3 getUpVector();
+		virtual glm::quat getOrientation();
 
 	protected:
 		glm::vec3 Center; 

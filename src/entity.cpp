@@ -7,63 +7,63 @@ XE::Entity::Entity(glm::vec3 center, glm::vec3 scaling, glm::vec3 euler)
 	Euler = euler;
 }
 
-void XE::Entity::Translate(const glm::vec3& t)
+void XE::Entity::translate(const glm::vec3& t)
 {
 	Center = t;
 }
 
-void XE::Entity::Scale(const glm::vec3& s)
+void XE::Entity::scale(const glm::vec3& s)
 {
 	Scaling = s;
 }
 
-void XE::Entity::Scale(const float& s)
+void XE::Entity::scale(const float& s)
 {
 	Scaling = glm::vec3(s);
 }
 
-void XE::Entity::Rotate(const glm::vec3& euler)
+void XE::Entity::rotate(const glm::vec3& euler)
 {
 	Euler = euler;
 }
 
-void XE::Entity::SetViewDir(const glm::vec3& dir)
+void XE::Entity::setViewDir(const glm::vec3& dir)
 {
 	Euler.x = asin(dir.y);
 	Euler.y = atan2(-dir.x, -dir.z);
 }
 
-void XE::Entity::SetOrientation(const glm::quat& q)
+void XE::Entity::setOrientation(const glm::quat& q)
 {
 	Euler = glm::vec3(glm::pitch(q), glm::yaw(q), glm::roll(q));
 }
 
-glm::vec3 XE::Entity::GetCenter()
+glm::vec3 XE::Entity::getCenter()
 {
 	return Center;
 }
 
-glm::vec3 XE::Entity::GetScale()
+glm::vec3 XE::Entity::getScale()
 {
 	return Scaling;
 }
 
-glm::vec3 XE::Entity::GetEuler()
+glm::vec3 XE::Entity::getEuler()
 {
 	return Euler;
 }
 
-glm::vec3 XE::Entity::GetViewDir()
+glm::vec3 XE::Entity::getViewDir()
 {
 	return glm::quat(Euler) * glm::vec3(0, 0, -1);
 }
 
-glm::vec3 XE::Entity::GetUpVector()
+glm::vec3 XE::Entity::getUpVector()
 {
 	return glm::quat(Euler) * glm::vec3(0, 1, 0);
 }
 
-glm::quat XE::Entity::GetOrientation()
+glm::quat XE::Entity::getOrientation()
 {
 	return glm::quat(Euler);
 }
