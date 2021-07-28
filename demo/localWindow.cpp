@@ -44,6 +44,10 @@ void LocalWindow::initializeScene()
 		Cubo = std::make_unique<Cube>();
 		Cubo->scale(10);
 		Cubo->translate(glm::vec3(0,5,0));
+
+		Conejo = std::make_unique<Model>("../models/house/medieval_house.obj", "medieval_house_diff.png", true, true, true);
+		Conejo->scale(0.1);
+		Conejo->translate(glm::vec3(0, 0, 0));
 		//Pyramid = std::make_unique<static_meshes_3D::Pyramid>(true, true, false);
 		//Torus = std::make_unique<static_meshes_3D::Torus>(50, 50, 3.0f, 1.5f, true, true, false);
 		//PlainGround = std::make_unique<static_meshes_3D::PlainGround>(true, true, false);
@@ -72,21 +76,13 @@ void LocalWindow::renderScene()
 
 	mainProgram[ShaderConstants::projectionMatrix()] = getProjectionMatrix();
 	mainProgram[ShaderConstants::viewMatrix()] = Camera.getViewMatrix();
-	mainProgram[ShaderConstants::modelMatrix()] = Cubo->getModelMatrix();
-	mainProgram[ShaderConstants::color()] = glm::vec4(0.0f, 0.6f, 1.0f, 1.0f);
+	mainProgram[ShaderConstants::modelMatrix()] = Conejo->getModelMatrix();
+	mainProgram[ShaderConstants::color()] = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	mainProgram[ShaderConstants::sampler()] = 0;
 
 	//porfa->render();
 	//TextureManager::getInstance().getTexture("ice").bind(0);
-	tm.bindTexture("ice", 0);
-	Cubo->rotate(glm::vec3(glfwGetTime(), 0, 0));
-	Cubo->render();
-
-	Cubo->translate(glm::vec3(20, 5, 0));
-	mainProgram[ShaderConstants::modelMatrix()] = Cubo->getModelMatrix();
-	tm.getTexture("diamond").bind(0);
-	Cubo->render();
-	Cubo->translate(glm::vec3(0, 5, 0));
+	Conejo->render();
 
 	//mainProgram[ShaderConstants::modelMatrix()] = glm::translate(Cubo->getModelMatrix(), glm::vec3(15,0,0));
 	//Cubo->render();

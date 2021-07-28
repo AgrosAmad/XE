@@ -70,7 +70,7 @@ IF (MSVC)
 	
 	# Assimp
 	SET(LIB_DIR "extern")
-	get_filename_component(ASSIMP_LIBRARY "${LIB_DIR}/lib/assimp-vc142-mtd.lib" ABSOLUTE)
+	get_filename_component(ASSIMP_LIBRARY "${LIB_DIR}/lib/assimp-vc142-mt.lib" ABSOLUTE)
 	#target_include_directories(${EXEC_NAME} PUBLIC "${LIB_DIR}/include/assimp")
 	
 	# GLUT

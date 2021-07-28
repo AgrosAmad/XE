@@ -10,5 +10,5 @@ uniform vec4 color;
 void main()
 {
     vec4 texel = texture(textura, texCoords);
-    outColor = texel + 0.000001 * color;
+    outColor = texel + 0.0001 * color;
 }

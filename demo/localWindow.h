@@ -24,6 +24,7 @@
 #include <geometry/primitives/cube.h>
 #include <geometry/primitives/quad.h>
 #include <geometry/primitives/triangle.h>
+#include <geometry/model.h>
 
 namespace XE
 {
@@ -38,6 +39,7 @@ namespace XE
 
         // Rendering
         std::unique_ptr<Cube> Cubo;
+        std::unique_ptr<Model> Conejo;
         //std::unique_ptr<Quad> porfa;
         //std::unique_ptr<Triangle> trifa;
 
