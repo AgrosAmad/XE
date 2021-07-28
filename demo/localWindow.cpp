@@ -8,26 +8,45 @@ void LocalWindow::initializeScene()
 
 	try
 	{
-		auto& sm = ShaderManager::getInstance();
+		//auto& sm = ShaderManager::getInstance();
 		auto& spm = ShaderProgramManager::getInstance();
 		auto& tm = TextureManager::getInstance();
 
-		sm.loadVertexShader("figures", "../shaders/figures.vert");
-		sm.loadFragmentShader("figures", "../shaders/figures.frag");
+		//sm.loadShaders("simple", "../shaders/figure3D");
 
-		auto& mainShaderProgram = spm.createShaderProgram("main");
-		mainShaderProgram.addShaderToProgram(sm.getVertexShader("figures"));
-		mainShaderProgram.addShaderToProgram(sm.getFragmentShader("figures"));
-		spm.linkAllPrograms();
+		spm.createShaderProgram("main", "../shaders/figure3D");
+		//simpleProgram.addShadersToProgram("../shaders/figure3D");
+		//simpleProgram.addShaderToProgram(sm.getVertexShader("simple"));
+		//simpleProgram.addShaderToProgram(sm.getFragmentShader("simple"));
+		//spm.linkAllPrograms();
+
 		SamplerManager::getInstance().createSampler("main", MAG_FILTER_BILINEAR, MIN_FILTER_TRILINEAR);
+		tm.loadTexture2D("diamond", "../textures/diamond.png");
+		tm.loadTexture2D("ice", "../textures/ice.png");
 
-		TextureManager::getInstance().loadTexture2D("diamond", "../textures/diamond.png");
-		TextureManager::getInstance().loadTexture2D("metal", "../textures/metal.png");
-		TextureManager::getInstance().loadTexture2D("ice", "../textures/ice.png");
+		//auto& sm = ShaderManager::getInstance();
+		//auto& spm = ShaderProgramManager::getInstance();
+		//auto& tm = TextureManager::getInstance();
 
-		Pyramid = std::make_unique<static_meshes_3D::Pyramid>(true, true, false);
-		Torus = std::make_unique<static_meshes_3D::Torus>(50, 50, 3.0f, 1.5f, true, true, false);
-		PlainGround = std::make_unique<static_meshes_3D::PlainGround>(true, true, false);
+		//sm.loadVertexShader("figures", "../shaders/figures.vert");
+		//sm.loadFragmentShader("figures", "../shaders/figures.frag");
+
+		//auto& mainShaderProgram = spm.createShaderProgram("main");
+		//mainShaderProgram.addShaderToProgram(sm.getVertexShader("figures"));
+		//mainShaderProgram.addShaderToProgram(sm.getFragmentShader("figures"));
+		//spm.linkAllPrograms();
+		//SamplerManager::getInstance().createSampler("main", MAG_FILTER_BILINEAR, MIN_FILTER_TRILINEAR);
+
+		//TextureManager::getInstance().loadTexture2D("diamond", "../textures/diamond.png");
+		//TextureManager::getInstance().loadTexture2D("metal", "../textures/metal.png");
+		//TextureManager::getInstance().loadTexture2D("ice", "../textures/ice.png");
+
+		Cubo = std::make_unique<Cube>();
+		Cubo->scale(10);
+		Cubo->translate(glm::vec3(0,5,0));
+		//Pyramid = std::make_unique<static_meshes_3D::Pyramid>(true, true, false);
+		//Torus = std::make_unique<static_meshes_3D::Torus>(50, 50, 3.0f, 1.5f, true, true, false);
+		//PlainGround = std::make_unique<static_meshes_3D::PlainGround>(true, true, false);
 	}
 	catch (const std::runtime_error& ex)
 	{
@@ -44,55 +63,67 @@ void LocalWindow::renderScene()
 {
 	const auto& spm = ShaderProgramManager::getInstance();
 	const auto& tm = TextureManager::getInstance();
-	auto& mm = MatrixManager::getInstance();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	// Set matrices in matrix manager
-	mm.setProjectionMatrix(getProjectionMatrix());
-	mm.setViewMatrix(Camera.getViewMatrix());
 
 	// Set up some common properties in the main shader program
 	auto& mainProgram = spm.getShaderProgram("main");
 	mainProgram.useProgram();
 	SamplerManager::getInstance().getSampler("main").bind();
+
 	mainProgram[ShaderConstants::projectionMatrix()] = getProjectionMatrix();
 	mainProgram[ShaderConstants::viewMatrix()] = Camera.getViewMatrix();
-	mainProgram[ShaderConstants::modelMatrix()] = glm::mat4(1.0f);
-	mainProgram[ShaderConstants::color()] = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	mainProgram[ShaderConstants::modelMatrix()] = Cubo->getModelMatrix();
+	mainProgram[ShaderConstants::color()] = glm::vec4(0.0f, 0.6f, 1.0f, 1.0f);
 	mainProgram[ShaderConstants::sampler()] = 0;
 
-	// Render icy ground
-	TextureManager::getInstance().getTexture("ice").bind(0);
-	PlainGround->render();
+	//porfa->render();
+	//TextureManager::getInstance().getTexture("ice").bind(0);
+	tm.bindTexture("ice", 0);
+	Cubo->rotate(glm::vec3(glfwGetTime(), 0, 0));
+	Cubo->render();
 
-	for (const auto& position : objectPositions)
-	{
-		// Render diamond pyramid on bottom
-		const auto pyramidSize = 10.0f;
-		auto posModelMatrix = glm::translate(glm::mat4(1.0f), position);
-		auto model = glm::translate(posModelMatrix, glm::vec3(0.0f, pyramidSize / 2.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(pyramidSize, pyramidSize, pyramidSize));
-		mainProgram[ShaderConstants::modelMatrix()] = model;
+	Cubo->translate(glm::vec3(20, 5, 0));
+	mainProgram[ShaderConstants::modelMatrix()] = Cubo->getModelMatrix();
+	tm.getTexture("diamond").bind(0);
+	Cubo->render();
+	Cubo->translate(glm::vec3(0, 5, 0));
 
-		TextureManager::getInstance().getTexture("diamond").bind(0);
-		Pyramid->render();
+	//mainProgram[ShaderConstants::modelMatrix()] = glm::translate(Cubo->getModelMatrix(), glm::vec3(15,0,0));
+	//Cubo->render();
 
-		// Render metal torus on top of the pyramid
-		const auto torusOffset = pyramidSize + Torus->getMainRadius() + Torus->getTubeRadius();
-		model = glm::translate(posModelMatrix, glm::vec3(0.0f, torusOffset, 0.0f));
-		model = glm::rotate(model, rotationAngleRad, glm::vec3(0.0f, 1.0f, 0.0f));
-		mainProgram[ShaderConstants::modelMatrix()] = model;
 
-		TextureManager::getInstance().getTexture("metal").bind(0);
-		Torus->render();
-	}
+	//// Render icy ground
+	//TextureManager::getInstance().getTexture("ice").bind(0);
+	//PlainGround->render();
+
+	//for (const auto& position : objectPositions)
+	//{
+	//	// Render diamond pyramid on bottom
+	//	const auto pyramidSize = 10.0f;
+	//	auto posModelMatrix = glm::translate(glm::mat4(1.0f), position);
+	//	auto model = glm::translate(posModelMatrix, glm::vec3(0.0f, pyramidSize / 2.0f, 0.0f));
+	//	model = glm::scale(model, glm::vec3(pyramidSize, pyramidSize, pyramidSize));
+	//	mainProgram[ShaderConstants::modelMatrix()] = model;
+
+	//	TextureManager::getInstance().getTexture("diamond").bind(0);
+	//	Pyramid->render();
+
+	//	// Render metal torus on top of the pyramid
+	//	const auto torusOffset = pyramidSize + Torus->getMainRadius() + Torus->getTubeRadius();
+	//	model = glm::translate(posModelMatrix, glm::vec3(0.0f, torusOffset, 0.0f));
+	//	model = glm::rotate(model, rotationAngleRad, glm::vec3(0.0f, 1.0f, 0.0f));
+	//	mainProgram[ShaderConstants::modelMatrix()] = model;
+
+	//	TextureManager::getInstance().getTexture("metal").bind(0);
+	//	Torus->render();
+	//}
 
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::Begin("fsf");
-	ImGui::Text("fsdf");
+	ImGui::Begin("Test");
+	ImGui::Text("Hello World");
 	ImGui::End();
 
 	ImGui::Render();
@@ -134,9 +165,9 @@ void LocalWindow::releaseScene()
 	TextureManager::getInstance().clearTextureCache();
 	SamplerManager::getInstance().clearSamplerCache();
 
-	Pyramid.reset();
-	Torus.reset();
-	PlainGround.reset();
+	//Pyramid.reset();
+	//Torus.reset();
+	//PlainGround.reset();
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();

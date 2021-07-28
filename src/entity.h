@@ -12,22 +12,19 @@
 
 namespace XE
 {
-	/*
-	* Provides an easy way to handle entities (light/objects/cameras)
-	*/
+	// Provides an easy way to handle entities (light/objects/cameras)
 	class Entity
 	{
 	public:
-		/*
-		* Constructor, initializes internal structures
-		*/
+		// Constructor, initializes internal structures
 		Entity(glm::vec3 center = glm::vec3(0.f),
 			   glm::vec3 scaling = glm::vec3(1.f),
 			   glm::vec3 euler = glm::vec3(0.f));
 
-		/*
-		* Misc. functions for positioning entity in space
-		*/
+		// Obtaining model matrix
+		virtual glm::mat4 getModelMatrix();
+
+		// Misc. functions for positioning entity in space
 		virtual void translate(const glm::vec3& t);
 		virtual void scale(const glm::vec3& s);
 		virtual void scale(const float& s);

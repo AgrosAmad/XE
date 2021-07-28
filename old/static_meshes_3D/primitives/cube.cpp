@@ -4,7 +4,7 @@
 // Project
 #include "cube.h"
 
-using namespace XE::static_meshes_3D;
+using namespace XE;
 
 glm::vec3 Cube::vertices[36] =
 {
@@ -39,38 +39,41 @@ glm::vec3 Cube::normals[6] =
 };
 
 Cube::Cube(bool withPositions, bool withTextureCoordinates, bool withNormals)
-    : StaticMesh3D(withPositions, withTextureCoordinates, withNormals)
+    : Renderable(withPositions, withTextureCoordinates, withNormals)
 {
     initializeData();
 }
 
 void Cube::render() const
 {
-    if (!_isInitialized) {
+    if (Initialized) 
+    {
         return;
     }
 
-    glBindVertexArray(_vao);
+    glBindVertexArray(Vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
 void Cube::renderPoints() const
 {
-    if (!_isInitialized) {
+    if (!Initialized) 
+    {
         return;
     }
 
-    glBindVertexArray(_vao);
+    glBindVertexArray(Vao);
     glDrawArrays(GL_POINTS, 0, 36);
 }
 
 void Cube::renderFaces(int facesBitmask) const
 {
-    if (!_isInitialized) {
+    if (!Initialized)
+    {
         return;
     }
 
-    glBindVertexArray(_vao);
+    glBindVertexArray(Vao);
 
     if (facesBitmask & CUBE_FRONT_FACE) {
         glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -94,28 +97,29 @@ void Cube::renderFaces(int facesBitmask) const
 
 void Cube::initializeData()
 {
-    if (_isInitialized) {
+    if (Initialized) 
+    {
         return;
     }
 
-    glGenVertexArrays(1, &_vao);
-    glBindVertexArray(_vao);
+    glGenVertexArrays(1, &Vao);
+    glBindVertexArray(Vao);
 
     const auto numVertices = 36;
     const auto vertexByteSize = getVertexByteSize();
-    _vbo.createVBO(vertexByteSize * numVertices);
-    _vbo.bindVBO();
+    Vbo.createVBO(vertexByteSize * numVertices);
+    Vbo.bindVBO();
     
     if (hasPositions())
     {
-        _vbo.addRawData(vertices, sizeof(glm::vec3)*numVertices);
+        Vbo.addRawData(vertices, sizeof(glm::vec3)*numVertices);
     }
 
     if (hasTextureCoordinates())
     {
         for (auto i = 0; i < 6; i++)
         {
-            _vbo.addRawData(textureCoordinates, sizeof(glm::vec2)*6);
+            Vbo.addRawData(textureCoordinates, sizeof(glm::vec2)*6);
         }
     }
 
@@ -123,11 +127,11 @@ void Cube::initializeData()
     {
         for (auto i = 0; i < 6; i++)
         {
-            _vbo.addRawData(&normals[i], sizeof(glm::vec3), 6);
+            Vbo.addRawData(&normals[i], sizeof(glm::vec3), 6);
         }
     }
 
-    _vbo.uploadDataToGPU(GL_STATIC_DRAW);
+    Vbo.uploadDataToGPU(GL_STATIC_DRAW);
     setVertexAttributesPointers(numVertices);
-    _isInitialized = true;
+    Initialized = true;
 }

@@ -39,6 +39,11 @@ namespace XE
          */
         void loadFragmentShader(const std::string& key, const std::string& filePath);
 
+        /*
+        * Creates new pair of shaders (vertex and fragment) with a specified key.
+        */
+        void loadShaders(const std::string& key, const std::string& filePath);
+
         /**
          * Creates new geometry shader and stores it with specified key.
          *

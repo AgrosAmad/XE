@@ -48,6 +48,27 @@ void ShaderManager::loadFragmentShader(const std::string& key, const std::string
     FragmentShaderCache[key] = std::move(fragmentShader);
 }
 
+void XE::ShaderManager::loadShaders(const std::string& key, const std::string& filePath)
+{
+    if (containsFragmentShader(key))
+    {
+        auto msg = "Fragment shader with key '" + key + "' already exists!";
+        throw std::runtime_error(msg.c_str());
+    }
+
+    if (containsVertexShader(key))
+    {
+        auto msg = "Vertex shader with key '" + key + "' already exists!";
+        throw std::runtime_error(msg.c_str());
+    }
+
+    std::string pathVertex = filePath + ".vert";
+    std::string pathFragment = filePath + ".frag";
+
+    loadVertexShader(key, pathVertex);
+    loadFragmentShader(key, pathFragment);
+}
+
 void ShaderManager::loadGeometryShader(const std::string& key, const std::string& filePath)
 {
     if (containsGeometryShader(key))

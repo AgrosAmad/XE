@@ -11,7 +11,7 @@
 #include <glm/glm.hpp>
 
 // Project
-#include "shader.h"
+#include <shader.h>
 #include "uniform.h"
 
 namespace XE

@@ -39,6 +39,15 @@ namespace XE {
         const Texture& getTexture(const std::string& key) const;
 
         /**
+        * Binds texture with a specified key to a specific ID.
+        *
+        * @param key  Key to get texture from
+        *
+        * @return Reference to Texture instance from a specified key.
+        */
+        void bindTexture(const std::string& key, const int& ID) const;
+
+        /**
          * Checks, if texture with specified key exists.
          *
          * @param key  Texture key to check existence of

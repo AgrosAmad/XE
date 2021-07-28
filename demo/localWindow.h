@@ -1,6 +1,5 @@
 #pragma once
 
-#include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 
 // XII Library
@@ -18,13 +17,13 @@
 #include "managers/samplerManager.h"
 #include "managers/matrixManager.h"
 
-#include "HUD010.h"
-#include "staticGeometry.h"
+//#include "staticGeometry.h"
 
 // Meshes
-#include "geometry/static_meshes_3D/plainGround.h"
-#include "geometry/static_meshes_3D/primitives/pyramid.h"
-#include "geometry/static_meshes_3D/primitives/torus.h"
+//#include <renderable.h>
+#include <geometry/primitives/cube.h>
+#include <geometry/primitives/quad.h>
+#include <geometry/primitives/triangle.h>
 
 namespace XE
 {
@@ -38,9 +37,13 @@ namespace XE
     private:
 
         // Rendering
-        std::unique_ptr<static_meshes_3D::Pyramid> Pyramid;
-        std::unique_ptr<static_meshes_3D::Torus> Torus;
-        std::unique_ptr<static_meshes_3D::PlainGround> PlainGround;
+        std::unique_ptr<Cube> Cubo;
+        //std::unique_ptr<Quad> porfa;
+        //std::unique_ptr<Triangle> trifa;
+
+        //std::unique_ptr<static_meshes_3D::Pyramid> Pyramid;
+        //std::unique_ptr<static_meshes_3D::Torus> Torus;
+        //std::unique_ptr<static_meshes_3D::PlainGround> PlainGround;
 
         // Camera
         FlyingCamera Camera = FlyingCamera(this, glm::vec3(0.0f, 8.0f, 20.0f), glm::vec3(0.0f, 8.0f, 19.0f), glm::vec3(0.0f, 1.0f, 0.0f), 50);

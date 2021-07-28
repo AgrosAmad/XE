@@ -34,6 +34,16 @@ namespace XE
 		ShaderProgram& createShaderProgram(const std::string& key);
 
 		/**
+		* Creates new shader program with corresponding shaders and stores it with specified key.
+		*
+		* @param key  Key to store shader program with
+		* @param path Path to the shader pair (vertex and fragment)
+		*
+		* @return Shader program instance with specified key.
+		*/
+		ShaderProgram& createShaderProgram(const std::string& key, const std::string& filePath);
+
+		/**
 		 * Retrieves shader program with a specified key.
 		 *
 		 * @param key  Key to get shader program from

@@ -1,7 +1,8 @@
 // STL
 #include <stdexcept>
 
-// Project
+// XE
+#include <managers/shaderManager.h>
 #include "shaderProgramManager.h"
 
 using namespace XE;
@@ -24,6 +25,26 @@ ShaderProgram& ShaderProgramManager::createShaderProgram(const std::string& key)
     shaderProgram->createProgram();
     ShaderProgramCache[key] = std::move(shaderProgram);
     
+    return getShaderProgram(key);
+}
+
+ShaderProgram& XE::ShaderProgramManager::createShaderProgram(const std::string& key, const std::string& filePath)
+{
+
+    // Loads shaders
+    auto& sm = ShaderManager::getInstance();
+    sm.loadShaders(key, filePath);
+
+    // Creates program
+    auto& tempProgram = createShaderProgram(key);
+
+    // Adds shaders to program
+    tempProgram.addShaderToProgram(sm.getVertexShader(key));
+    tempProgram.addShaderToProgram(sm.getFragmentShader(key));
+
+    // Links program
+    tempProgram.linkProgram();
+
     return getShaderProgram(key);
 }
 

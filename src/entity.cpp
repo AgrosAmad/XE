@@ -7,6 +7,15 @@ XE::Entity::Entity(glm::vec3 center, glm::vec3 scaling, glm::vec3 euler)
 	Euler = euler;
 }
 
+glm::mat4 XE::Entity::getModelMatrix()
+{
+	return	glm::translate(glm::mat4(1.0f), Center) *
+		glm::scale(glm::mat4(1.0f), Scaling) *
+		//glm::translate(glm::mat4(1.0f), Center) *
+		glm::mat4_cast(getOrientation());//*
+			//glm::translate(glm::mat4(1.0f), -Center);
+}
+
 void XE::Entity::translate(const glm::vec3& t)
 {
 	Center = t;

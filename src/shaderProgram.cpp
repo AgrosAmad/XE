@@ -1,7 +1,7 @@
 // STL
 #include <iostream>
 
-// Project
+// XE
 #include "shaderProgram.h"
 
 using namespace XE;

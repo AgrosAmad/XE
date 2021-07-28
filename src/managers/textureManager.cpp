@@ -38,6 +38,11 @@ const Texture& TextureManager::getTexture(const std::string& key) const
     return *TextureCache.at(key).get();
 }
 
+void XE::TextureManager::bindTexture(const std::string& key, const int& ID) const
+{
+    TextureCache.at(key)->bind(ID);
+}
+
 bool TextureManager::deleteTexture(const std::string& key)
 {
     if (containsTexture(key))
