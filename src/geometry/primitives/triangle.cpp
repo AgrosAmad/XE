@@ -29,7 +29,7 @@ Triangle::Triangle(bool withPositions, bool withTextureCoordinates, bool withNor
 	initializeData();
 }
 
-void XE::Triangle::render() const
+void XE::Triangle::render()
 {
 	if (!Initialized)
 	{

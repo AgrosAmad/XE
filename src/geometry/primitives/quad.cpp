@@ -32,7 +32,7 @@ Quad::Quad(bool withPositions, bool withTextureCoordinates, bool withNormals)
 	initializeData();
 }
 
-void Quad::render() const
+void Quad::render()
 {
     if (!Initialized) 
     {

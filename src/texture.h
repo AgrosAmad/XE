@@ -44,7 +44,7 @@ namespace XE
          *
          * @param textureUnit  Texture unit index (default is 0)
          */
-        void bind(int textureUnit = 0) const;
+        void bind(int textureUnit = 0);
 
         /**
          * Deletes loaded texture from OpenGL. Does nothing if the texture has not been loaded correctly.
@@ -78,8 +78,12 @@ namespace XE
          */
         static int getNumTextureImageUnits();
 
+        // Gets texture ID in OpenGL-assigned units
+        int getTextureUnit() const;
+
     private:
         GLuint TextureID = 0; // OpenGL-assigned texture ID
+        int TextureUnit = 0; // OpenGL-assigned texture unit ID
         int Width = 0; // Width of texture in pixels
         int Height = 0; // Height of texture in pixels
         int BytesPerPixel = 0; // Amount of bytes every pixel is represented with

@@ -36,7 +36,7 @@ namespace XE {
          *
          * @return Reference to Texture instance from a specified key.
          */
-        const Texture& getTexture(const std::string& key) const;
+        Texture& getTexture(const std::string& key) const;
 
         /**
         * Binds texture with a specified key to a specific ID.

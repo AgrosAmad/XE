@@ -33,7 +33,7 @@ namespace XE
          */
         bool loadModelFromFile(const std::string& filePath, const std::string& defaultTextureName = "", const glm::mat4& modelTransformMatrix = glm::mat4(1.0f));
 
-        void render() const override;
+        void render() override;
         void renderPoints() const override;
 
     protected:

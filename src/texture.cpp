@@ -68,12 +68,14 @@ bool Texture::loadTexture2D(const std::string& filePath, bool generateMipmaps)
     return result;
 }
 
-void Texture::bind(const int textureUnit) const
+void Texture::bind(int textureUnit)
 {
-    if (!isLoadedCheck()) {
+    if (!isLoadedCheck()) 
+    {
         return;
     }
 
+    TextureUnit = textureUnit;
     glActiveTexture(GL_TEXTURE0 + textureUnit);
     glBindTexture(GL_TEXTURE_2D, TextureID);
 }
@@ -115,6 +117,11 @@ int Texture::getNumTextureImageUnits()
     std::call_once(queryOnceFlag, []() {glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &maxTextureUnits); });
     
     return maxTextureUnits;
+}
+
+int XE::Texture::getTextureUnit() const
+{
+    return TextureUnit;
 }
 
 bool Texture::isLoadedCheck() const

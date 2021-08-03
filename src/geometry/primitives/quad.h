@@ -17,7 +17,7 @@ namespace XE
 
 		Quad(bool withPositions = true, bool withTextureCoordinates = true, bool withNormals = true);
 
-		void render() const override;
+		void render() override;
 		
 		static glm::vec3 Vertices[4]; // Array of mesh vertices
 		static glm::vec2 TextureCoord[4]; // Array of texture coordinates

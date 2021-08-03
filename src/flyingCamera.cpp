@@ -21,7 +21,7 @@ FlyingCamera::FlyingCamera(OpenGLWindow* localWindow, const glm::vec3& position,
     , Window(localWindow)
 {
     // Standard WSAD controls, as you are used to from games :)
-    setControls(GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D, GLFW_MOUSE_BUTTON_MIDDLE);
+    setControls(GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D, GLFW_MOUSE_BUTTON_RIGHT);
 }
 
 void FlyingCamera::setMoveSpeed(float moveSpeed)

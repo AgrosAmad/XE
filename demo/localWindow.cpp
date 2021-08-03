@@ -14,7 +14,7 @@ void LocalWindow::initializeScene()
 
 		//sm.loadShaders("simple", "../shaders/figure3D");
 
-		spm.createShaderProgram("main", "../shaders/figure3D");
+		spm.createShaderProgram("figure3D", "../shaders/common/figure3D");
 		//simpleProgram.addShadersToProgram("../shaders/figure3D");
 		//simpleProgram.addShaderToProgram(sm.getVertexShader("simple"));
 		//simpleProgram.addShaderToProgram(sm.getFragmentShader("simple"));
@@ -70,22 +70,22 @@ void LocalWindow::renderScene()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Set up some common properties in the main shader program
-	auto& mainProgram = spm.getShaderProgram("main");
+	auto& mainProgram = spm.getShaderProgram("figure3D");
 	mainProgram.useProgram();
 	SamplerManager::getInstance().getSampler("main").bind();
 
 	mainProgram[ShaderConstants::projectionMatrix()] = getProjectionMatrix();
 	mainProgram[ShaderConstants::viewMatrix()] = Camera.getViewMatrix();
-	mainProgram[ShaderConstants::modelMatrix()] = Conejo->getModelMatrix();
-	mainProgram[ShaderConstants::color()] = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-	mainProgram[ShaderConstants::sampler()] = 0;
 
 	//porfa->render();
 	//TextureManager::getInstance().getTexture("ice").bind(0);
-	Conejo->render();
+	//Conejo->render();
 
 	//mainProgram[ShaderConstants::modelMatrix()] = glm::translate(Cubo->getModelMatrix(), glm::vec3(15,0,0));
-	//Cubo->render();
+	TextureManager::getInstance().getTexture("ice").bind(0);
+	TextureManager::getInstance().getTexture("diamond").bind(1);
+	Cubo->setDiffuse("diamond");
+	Cubo->render();
 
 
 	//// Render icy ground

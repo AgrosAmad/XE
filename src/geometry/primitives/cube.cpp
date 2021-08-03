@@ -38,20 +38,26 @@ glm::vec3 Cube::normals[6] =
     glm::vec3(0.0f, -1.0f, 0.0f), // Bottom face
 };
 
-Cube::Cube(bool withPositions, bool withTextureCoordinates, bool withNormals)
+Cube::Cube(glm::vec3 color, bool withPositions, bool withTextureCoordinates, bool withNormals)
     : Renderable(withPositions, withTextureCoordinates, withNormals)
 {
+
+    // Init data for OpenGL
     initializeData();
+
+    // Setup material properties
+    MaterialProp.Color = color;
+    ShaderName = "figure3D";
 }
 
-void Cube::render() const
+void Cube::render()
 {
     if (!Initialized) 
     {
-        std::cout << "asff" << std::endl;
         return;
     }
 
+    setMaterialInfo();
     glBindVertexArray(Vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }

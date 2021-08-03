@@ -8,11 +8,24 @@
 // XE
 #include <entity.h>
 #include <vertexBufferObject.h>
+#include <managers/shaderProgramManager.h>
+#include <managers/textureManager.h>
 
 namespace XE
 {
-	class ShaderProgramManager;
-	class TextureManager;
+	/*
+	* Material properties, value of -1 means it does not apply
+	* to this object
+	*/
+	struct MaterialSamplers
+	{
+		glm::vec3 Color = glm::vec3(0.f,0.f,0.f);
+		int Diffuse     = -1;
+		int Specular    = -1;
+		int Emission    = -1;
+		float Shininess = 1.f;
+		bool Active     = false;
+	};
 
 	// Provides an easy way to handle drawable entities (objs, geometry)
 	class Renderable : public Entity
@@ -30,7 +43,7 @@ namespace XE
 		virtual ~Renderable();
 
 		// Standard methods of renderables
-		virtual void render() const {};
+		virtual void render() {};
 		virtual void renderPoints() const {};
 		virtual void update() {};
 		virtual void deleteMesh();
@@ -43,6 +56,21 @@ namespace XE
 		// Gets byte size of one vertex (depending on attributes)
 		int getVertexByteSize();
 
+		// Sets render mode of drawing (material properties or just plain color)
+		void setMaterialInfo();
+
+		// Changes shader in charge of drawing
+		void setShader(const std::string& name);
+
+		// Sets diffuse material by texture name
+		void setDiffuse(const std::string& name);
+
+		// Sets specular material by texture name
+		void setSpecular(const std::string& name);
+
+		// Sets emission material by texture name
+		void setEmission(const std::string& name);
+
 	protected:
 
 		// Initialize vertex data 
@@ -54,11 +82,17 @@ namespace XE
 		bool HasNormals = false;
 		bool Initialized = false;
 
+		// Material properties/color
+		MaterialSamplers MaterialProp;
+
 		// OpenGL data
 		GLuint Vao = 0;
 		VertexBufferObject Vbo;
 
 		// Sets vertex attribute pointers in standard way
 		void setVertexAttributesPointers(int numVertices);
+
+		// Name of the program responsible for drawing this object
+		std::string ShaderName;
 	};
 }

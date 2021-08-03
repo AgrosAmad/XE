@@ -157,7 +157,7 @@ bool Model::loadModelFromFile(const std::string& filePath, const std::string& de
     return Initialized;
 }
 
-void XE::Model::render() const
+void XE::Model::render()
 {
     if (!Initialized) 
     {

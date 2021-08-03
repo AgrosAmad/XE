@@ -15,7 +15,7 @@ namespace XE
 	public:
 		Triangle(bool withPositions = true, bool withTextureCoordinates = true, bool withNormals = true);
 
-		void render() const override;
+		void render() override;
 
 		static glm::vec3 Vertices[3]; // Array of mesh vertices
 		static glm::vec2 TextureCoord[3]; // Array of texture coordinates

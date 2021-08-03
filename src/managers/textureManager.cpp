@@ -27,7 +27,7 @@ void TextureManager::loadTexture2D(const std::string& key, const std::string& fi
     TextureCache[key] = std::move(texturePtr);
 }
 
-const Texture& TextureManager::getTexture(const std::string& key) const
+Texture& TextureManager::getTexture(const std::string& key) const
 {
     if (!containsTexture(key))
     {

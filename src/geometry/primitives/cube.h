@@ -20,9 +20,9 @@ namespace XE
     class Cube : public Renderable
     {
     public:
-        Cube(bool withPositions = true, bool withTextureCoordinates = true, bool withNormals = true);
+        Cube(glm::vec3 color = glm::vec3(1.0f, 0.28f, 0.57f), bool withPositions = true, bool withTextureCoordinates = true, bool withNormals = true);
 
-        void render() const override;
+        void render() override;
         void renderPoints() const override;
         void renderFaces(int facesBitmask) const;
 

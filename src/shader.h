@@ -43,10 +43,10 @@ namespace XE
     {
     public:
         // Matrices
-        DEFINE_SHADER_CONSTANT(modelMatrix, "matrices.ModelMatrix");
-        DEFINE_SHADER_CONSTANT(projectionMatrix, "matrices.ProjectionMatrix");
-        DEFINE_SHADER_CONSTANT(viewMatrix, "matrices.ViewMatrix");
-        DEFINE_SHADER_CONSTANT(normalMatrix, "matrices.NormalMatrix");
+        DEFINE_SHADER_CONSTANT(modelMatrix, "mvp.ModelMatrix");
+        DEFINE_SHADER_CONSTANT(projectionMatrix, "mvp.ProjectionMatrix");
+        DEFINE_SHADER_CONSTANT(viewMatrix, "mvp.ViewMatrix");
+        DEFINE_SHADER_CONSTANT(normalMatrix, "mvp.NormalMatrix");
 
         // Color and textures
         DEFINE_SHADER_CONSTANT(color, "color");
